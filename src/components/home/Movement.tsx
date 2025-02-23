@@ -1,8 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { Button } from '@/src/components/ui/Button';
+import Image from 'next/image';
+import { Play } from 'lucide-react';
 
 export const Movement = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+
   return (
     <section className="bg-black text-white py-12 md:py-24">
       <div className="container mx-auto px-4">
@@ -37,34 +42,31 @@ export const Movement = () => {
           </div>
         </div>
 
-        {/* Video Container */}
-        <div className="mt-8 md:mt-16 rounded-2xl md:rounded-3xl overflow-hidden aspect-video relative">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <button 
-              className="w-12 h-12 md:w-16 md:h-16 bg-white rounded-full flex items-center justify-center hover:scale-110 transition-transform"
-              aria-label="Play video"
-            >
-              <svg 
-                width="20" 
-                height="20" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-                className="md:w-6 md:h-6"
-              >
-                <path 
-                  d="M8 5v14l11-7z" 
-                  fill="currentColor"
-                />
-              </svg>
-            </button>
-          </div>
-          <video
-            poster="/images/movement-poster.jpg"
-            className="w-full h-full object-cover"
-          >
-            <source src="/videos/movement.mp4" type="video/mp4" />
-          </video>
+        {/* Video Container with Thumbnail */}
+        <div className="mt-8 md:mt-16 rounded-2xl md:rounded-3xl overflow-hidden aspect-video relative max-w-4xl mx-auto">
+          {isPlaying ? (
+            <iframe
+              src="https://www.youtube.com/embed/dkWfyVrqS4g?autoplay=1"
+              title="EFInA Movement Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute top-0 left-0 w-full h-full"
+            />
+          ) : (
+            <div className="relative w-full h-full cursor-pointer" onClick={() => setIsPlaying(true)}>
+              <Image
+                src="/images/movement/movement-poster.jpg"
+                alt="Video thumbnail"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 flex items-center justify-center hover:bg-white transition-colors">
+                  <Play className="w-8 h-8 md:w-10 md:h-10 text-black ml-1" />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
