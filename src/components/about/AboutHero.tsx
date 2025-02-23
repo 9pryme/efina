@@ -12,8 +12,6 @@ export const AboutHero = ({ title, description }: AdvocacyHeroProps) => {
   return (
     <>
       <section className="relative min-h-[400px] md:min-h-[600px] bg-black">
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 to-black/20" />
-        
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -61,7 +59,14 @@ export const AboutHero = ({ title, description }: AdvocacyHeroProps) => {
         <div className="relative -mt-[50px] md:-mt-[200px]">
           <div className="container mx-auto px-4">
             <div className="flex justify-end">
-              <div className="relative w-full md:w-[1500px] h-[200px] md:h-[400px] bg-blue-500 rounded-lg shadow-xl" />
+              <div className="relative w-full md:w-[1500px] h-[200px] md:h-[400px] rounded-lg shadow-xl overflow-hidden">
+                <Image
+                  src="/images/about/banner.jpg"
+                  alt="About banner"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 
 interface InsightHeroProps {
   title: string;
@@ -10,13 +9,9 @@ interface InsightHeroProps {
 }
 
 export const InsightHero = ({ title, description }: InsightHeroProps) => {
-  const [videoLoaded, setVideoLoaded] = useState(false);
-
   return (
     <>
       <section className="relative min-h-[400px] md:min-h-[600px] bg-black">
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 to-black/20" />
-        
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -68,14 +63,10 @@ export const InsightHero = ({ title, description }: InsightHeroProps) => {
                 <iframe
                   src="https://www.youtube.com/embed/ocdV9tbm8jg"
                   title="YouTube video"
-                  className={`absolute top-0 left-0 w-full h-full ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                  className="absolute top-0 left-0 w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
-                  onLoad={() => setVideoLoaded(true)}
                 />
-                {!videoLoaded && (
-                  <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-                )}
               </div>
             </div>
           </div>

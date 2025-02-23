@@ -6,18 +6,17 @@ import { motion } from 'framer-motion';
 interface AdvocacyHeroProps {
   title: string;
   description: string;
+  bannerImage: string; // Add banner image prop
 }
 
-export const AdvocacyHero = ({ title, description }: AdvocacyHeroProps) => {
+export const AdvocacyHero = ({ title, description, bannerImage }: AdvocacyHeroProps) => {
   return (
     <>
       <section className="relative min-h-[400px] md:min-h-[600px] bg-black">
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 to-black/20" />
-        
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/advocacy/hero-bg.jpg"
+            src="/images/banners/hero-bg.png"
             alt="Advocacy background"
             fill
             className="object-cover"
@@ -61,7 +60,14 @@ export const AdvocacyHero = ({ title, description }: AdvocacyHeroProps) => {
         <div className="relative -mt-[50px] md:-mt-[200px]">
           <div className="container mx-auto px-4">
             <div className="flex justify-end">
-              <div className="relative w-full md:w-[1500px] h-[200px] md:h-[400px] bg-[#008F60] rounded-lg shadow-xl" />
+              <div className="relative w-full md:w-[1500px] h-[200px] md:h-[400px] rounded-lg shadow-xl overflow-hidden">
+                <Image
+                  src={bannerImage}
+                  alt="Banner image"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -35,7 +35,7 @@ export const TechnicalAdvisorySection = () => {
             {/* Left Column - Image */}
             <div className="relative aspect-square rounded-2xl overflow-hidden bg-[#C9FFED]">
               <Image
-                src="/images/systems/technical-advisory.jpg"
+                src="/images/random/technical-advisory.jpg"
                 alt="Technical Advisory"
                 fill
                 className="object-cover"

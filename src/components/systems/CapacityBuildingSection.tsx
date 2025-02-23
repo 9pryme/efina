@@ -72,7 +72,7 @@ export const CapacityBuildingSection = () => {
           {/* Image */}
           <div className="mt-16 relative aspect-[21/9] rounded-2xl overflow-hidden bg-[#C9FFED]">
             <Image
-              src="/images/systems/capacity-building.jpg"
+              src="/images/random/pos.png"
               alt="Capacity Building"
               fill
               className="object-cover"

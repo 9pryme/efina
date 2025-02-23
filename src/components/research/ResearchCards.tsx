@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { ResearchCard } from './ResearchCard';
 
 const cards = [
@@ -10,12 +9,13 @@ const cards = [
     links: [
       {
         text: "View Survey Results",
-        href: "#"
+        href: "https://a2f.ng/datasets/",
+        target: "_blank"
       }
     ]
   },
   {
-    title: "Assessment of Women&apos;s Financial Inclusion in Nigeria",
+    title: "Assessment of Women Financial Inclusion in Nigeria",
     content: (
       <>
         <p>
@@ -58,72 +58,14 @@ const cards = [
 ];
 
 export const ResearchCards = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const cards = cardsRef.current.filter(Boolean);
-    if (!section || cards.length === 0) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('sticky');
-          entry.target.classList.remove('translate-y-full');
-        }
-      });
-    }, {
-      root: null,
-      threshold: 0.1,
-      rootMargin: '0px 0px -20% 0px'
-    });
-
-    cards.forEach((card) => {
-      if (card) observer.observe(card);
-    });
-
-    const handleScroll = () => {
-      const lastCard = cards[cards.length - 1];
-      if (!lastCard) return;
-
-      const sectionBottom = section.offsetTop + section.offsetHeight;
-      const scrollPosition = window.scrollY + window.innerHeight;
-      
-      if (scrollPosition >= sectionBottom) {
-        lastCard.style.position = 'absolute';
-        lastCard.style.bottom = '40vh';
-        lastCard.style.top = 'auto';
-      } else {
-        lastCard.style.position = 'sticky';
-        lastCard.style.top = `calc(20vh + ${(cards.length - 1) * 8}px)`;
-        lastCard.style.bottom = 'auto';
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
-    <section ref={sectionRef} className="py-24 bg-gray-50 min-h-screen">
+    <section className="py-24 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="relative space-y-[60vh] pb-[40vh] flex flex-col items-center">
+        <div className="space-y-8 flex flex-col items-center">
           {cards.map((card, index) => (
             <div
               key={index}
-              ref={(el) => {
-                if (el) cardsRef.current[index] = el;
-              }}
-              className="transition-transform duration-700 translate-y-full w-full max-w-[900px]"
-              style={{
-                position: 'sticky',
-                top: `calc(20vh + ${index * 8}px)`,
-              }}
+              className="w-full max-w-[900px]"
             >
               <ResearchCard {...card} index={index} />
             </div>

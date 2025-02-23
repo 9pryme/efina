@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 
@@ -12,9 +12,9 @@ const menuItems = {
   initiatives: {
     label: 'Initiatives',
     items: [
-      { label: 'Access to Finance', href: '/initiatives/access-to-finance', description: 'Comprehensive tracking of financial inclusion' },
-      { label: 'Gender Center of Excellence', href: '/initiatives/gender-center', description: 'A strategic resource centre' },
-      { label: 'Inclusion for All', href: '/initiatives/inclusion-for-all', description: 'Removing barriers to financial inclusion' },
+      { label: 'Access to Finance', href: 'https://a2f.ng/', description: 'Comprehensive tracking of financial inclusion' },
+      { label: 'Gender Center of Excellence', href: 'https://gendercentreofexcellence.org/', description: 'A strategic resource centre' },
+      { label: 'Inclusion for All', href: 'https://inclusion-for-all.org/', description: 'Removing barriers to financial inclusion' },
     ],
   },
   ourWork: {
@@ -38,21 +38,44 @@ interface NavigationMenuProps {
 
 export const NavigationMenu = ({ onNavigate }: NavigationMenuProps) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseEnter = (key: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setActiveMenu(key);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveMenu(null);
+    }, 150);
+  };
 
   const handleNavigate = () => {
     setActiveMenu(null);
     onNavigate?.();
   };
 
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <nav>
+    <nav ref={menuRef}>
       <ul className="flex flex-col md:flex-row md:gap-8">
         {Object.entries(menuItems).map(([key, item]) => (
           <li 
             key={key}
             className="relative py-2"
-            onMouseEnter={() => setActiveMenu(key)}
-            onMouseLeave={() => setActiveMenu(null)}
+            onMouseEnter={() => handleMouseEnter(key)}
+            onMouseLeave={handleMouseLeave}
           >
             {'items' in item ? (
               <>
@@ -67,7 +90,11 @@ export const NavigationMenu = ({ onNavigate }: NavigationMenuProps) => {
                   />
                 </button>
                 {activeMenu === key && (
-                  <div className="md:absolute md:top-full md:left-0 w-full md:w-[400px] bg-gray-50 md:bg-white md:shadow-lg md:rounded-lg overflow-hidden py-2 md:py-4 md:mt-1">
+                  <div 
+                    className="md:absolute md:top-full md:left-0 w-full md:w-[400px] bg-gray-50 md:bg-white md:shadow-lg md:rounded-lg overflow-hidden py-2 md:py-4 md:mt-1"
+                    onMouseEnter={() => handleMouseEnter(key)}
+                    onMouseLeave={handleMouseLeave}
+                  >
                     <div className="grid gap-2">
                       {item.items.map((subItem) => (
                         <Link

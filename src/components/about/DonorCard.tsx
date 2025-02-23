@@ -24,7 +24,7 @@ export const DonorCard = ({ name, logo, description, bgColor, index }: DonorCard
         }
       }}
       viewport={{ once: true }}
-      className={`rounded-3xl overflow-hidden ${bgColor} group w-full max-w-sm mx-auto`}
+      className={`rounded-3xl overflow-hidden ${bgColor} group w-full max-w-sm md:max-w-2xl mx-auto`}
     >
       <div className="aspect-[3/2] relative">
         {/* Background Image */}
@@ -38,7 +38,7 @@ export const DonorCard = ({ name, logo, description, bgColor, index }: DonorCard
         <div className="absolute inset-0 bg-black/80" />
         {/* Logo */}
         <div className="relative h-full p-4 sm:p-8 flex items-center justify-center">
-          <div className="relative w-32 sm:w-48 h-16 sm:h-24">
+          <div className="relative w-32 sm:w-48 md:w-64 h-16 sm:h-24 md:h-32">
             <Image
               src={logo}
               alt={name}
@@ -48,9 +48,9 @@ export const DonorCard = ({ name, logo, description, bgColor, index }: DonorCard
           </div>
         </div>
       </div>
-      <div className="bg-white mx-2 sm:mx-4 mb-2 sm:mb-4 rounded-2xl p-3 sm:p-4 h-[200px] sm:h-[250px] flex flex-col">
-        <h3 className="font-display text-xl sm:text-2xl text-gray-900 mb-2 sm:mb-4">{name}</h3>
-        <p className="text-gray-600 text-xs sm:text-sm leading-relaxed flex-1 overflow-y-auto">{description}</p>
+      <div className="bg-white mx-2 sm:mx-4 mb-2 sm:mb-4 rounded-2xl p-3 sm:p-4 md:p-6 h-[200px] sm:h-[250px] md:h-[300px] flex flex-col">
+        <h3 className="font-display text-xl sm:text-2xl md:text-3xl text-gray-900 mb-2 sm:mb-4 md:mb-6">{name}</h3>
+        <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed flex-1 overflow-y-auto">{description}</p>
       </div>
     </motion.div>
   );

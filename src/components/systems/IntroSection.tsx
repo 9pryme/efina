@@ -27,7 +27,7 @@ export const IntroSection = () => {
             {/* Image */}
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#C9FFED]">
               <Image
-                src="/images/systems/intro.jpg"
+                src="/images/random/systems.jpg"
                 alt="Systems Strengthening"
                 fill
                 className="object-cover"

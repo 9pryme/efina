@@ -10,13 +10,9 @@ interface LeadershipCardProps {
   bio: string;
   image: string;
   linkedIn: string;
-  index: number;
-  total: number;
 }
 
-export const LeadershipCard = ({ name, title, bio, image, linkedIn, index, total }: LeadershipCardProps) => {
-  const reverseDelay = (total - index - 1) * 0.2;
-
+export const LeadershipCard = ({ name, title, bio, image, linkedIn }: LeadershipCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -25,15 +21,14 @@ export const LeadershipCard = ({ name, title, bio, image, linkedIn, index, total
         y: 0,
         transition: {
           type: "spring",
-          duration: 1,
-          delay: reverseDelay
+          duration: 1
         }
       }}
       viewport={{ once: true, margin: "-100px" }}
       className="bg-white rounded-2xl p-4 md:p-8 flex flex-col md:flex-row gap-4 md:gap-8 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-2px_rgba(0,0,0,0.05),0_-4px_6px_-1px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_8px_10px_-6px_rgba(0,0,0,0.05),0_-20px_25px_-5px_rgba(0,0,0,0.1)] transition-shadow duration-300"
     >
       {/* Image */}
-      <div className="relative w-full md:w-[200px] h-[200px] md:h-[240px] shrink-0">
+      <div className="relative w-full aspect-square md:w-[200px] md:h-[240px] shrink-0">
         <Image
           src={image}
           alt={name}

@@ -29,10 +29,9 @@ export const TeamCard = ({ name, position, image, index, fallbackColor, bio }: T
         }
       }}
       viewport={{ once: true }}
-      className="group perspective w-full sm:w-[calc(50%-1rem)]" // Adjusted for 2 column grid on mobile
-      onClick={() => bio && window.innerWidth <= 768 && setIsFlipped(!isFlipped)} // Touch interaction for mobile
-      onMouseEnter={() => bio && window.innerWidth > 768 && setIsFlipped(true)}
-      onMouseLeave={() => bio && window.innerWidth > 768 && setIsFlipped(false)}
+      className="group perspective"
+      onMouseEnter={() => bio && setIsFlipped(true)}
+      onMouseLeave={() => bio && setIsFlipped(false)}
     >
       <div 
         className={`
@@ -44,7 +43,7 @@ export const TeamCard = ({ name, position, image, index, fallbackColor, bio }: T
         <div className="backface-hidden w-full">
           <div 
             className={`
-              relative aspect-[4/5] sm:aspect-[3/4] overflow-hidden rounded-xl sm:rounded-2xl mb-3 sm:mb-4
+              relative aspect-[3/4] overflow-hidden rounded-2xl mb-4
               ${imageError ? fallbackColor : ''}
               ${!bio ? 'transition-transform duration-500 group-hover:scale-110' : ''}
             `}
@@ -62,14 +61,14 @@ export const TeamCard = ({ name, position, image, index, fallbackColor, bio }: T
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                <span className="text-2xl sm:text-4xl font-display">
+                <span className="text-4xl font-display">
                   {name.split(' ').map(word => word[0]).join('')}
                 </span>
               </div>
             )}
           </div>
-          <h3 className="font-display text-lg sm:text-xl text-gray-900">{name}</h3>
-          <p className="text-xs sm:text-sm text-gray-600">{position}</p>
+          <h3 className="font-display text-xl text-gray-900">{name}</h3>
+          <p className="text-sm text-gray-600">{position}</p>
         </div>
 
         {/* Back of card - Only render if bio exists */}
@@ -77,13 +76,13 @@ export const TeamCard = ({ name, position, image, index, fallbackColor, bio }: T
           <div 
             className={`
               absolute top-0 left-0 w-full h-full rotate-y-180 backface-hidden
-              bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg
+              bg-white rounded-2xl p-6 shadow-lg overflow-hidden
             `}
           >
             <div className="h-full flex flex-col justify-between">
-              <div>
-                <h3 className="font-display text-lg sm:text-xl text-gray-900 mb-2">{name}</h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-[12]">{bio}</p>
+              <div className="overflow-y-auto">
+                <h3 className="font-display text-xl text-gray-900 mb-2">{name}</h3>
+                <p className="text-gray-600 leading-relaxed md:text-sm text-xs">{bio}</p>
               </div>
             </div>
           </div>

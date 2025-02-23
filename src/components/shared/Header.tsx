@@ -67,13 +67,13 @@ export const Header = () => {
 
             {/* Desktop CTA Buttons */}
             <div className="hidden md:flex items-center gap-4">
-              <Button 
+              {/* <Button 
                 href="/identity"
                 variant="outline-black"
                 className="text-gray-900"
               >
                 Our new identity
-              </Button>
+              </Button> */}
               <Button 
                 href="/contact"
                 variant="primary"
@@ -103,14 +103,14 @@ export const Header = () => {
                 <NavigationMenu onNavigate={handleNavigate} />
               </div>
               <div className="flex flex-col gap-4 p-4 border-t">
-                <Button 
+                {/* <Button 
                   href="/identity"
                   variant="outline-black"
                   className="w-full text-gray-900 justify-center text-base py-3"
                   onClick={handleNavigate}
                 >
                   Our new identity
-                </Button>
+                </Button> */}
                 <Button 
                   href="/contact"
                   variant="primary"

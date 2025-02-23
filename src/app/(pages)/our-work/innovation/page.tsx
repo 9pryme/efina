@@ -9,6 +9,7 @@ export default function InnovationPage() {
       <AdvocacyHero 
         title="Innovation"
         description="EFInA's focus on supporting Innovation to promote financial sector development and financial inclusion is implemented through the EFInA Innovation Fund and a series of innovation fora."
+        bannerImage="/images/banners/innovation.png"
       />
       <InnovationIntro />
       <InnovationFund />

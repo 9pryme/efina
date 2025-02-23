@@ -8,19 +8,19 @@ export const WhoWeAre = () => {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="font-display text-[40px] md:text-[56px] leading-[1.2] mb-8 md:mb-16 text-gray-900"
-        >
-          Who we are?
-        </motion.h2>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20">
           {/* Left Column - Text Content */}
-          <div className="flex flex-col space-y-6 mt-0 md:mt-[150px]">
+          <div className="flex flex-col space-y-6">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="font-display text-[40px] md:text-[56px] leading-[1.2] text-gray-900"
+            >
+              Who we are?
+            </motion.h2>
+
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +49,7 @@ export const WhoWeAre = () => {
               className="pt-4 order-last md:order-none"
             >
               <Button 
-                href="/about/fsd"
+                href="/our-work/advocacy"
                 variant="outline"
                 className="w-full md:w-auto rounded-full text-gray-900 border-gray-900 hover:bg-gray-100"
               >
@@ -78,8 +78,8 @@ export const WhoWeAre = () => {
               className="relative h-[250px] md:h-[400px] order-last md:order-none"
             >
               <Image
-                src="/images/mission.jpg"
-                alt="Modern office building"
+                src="/images/random/EFINA-advocacy.png"
+                alt="EFInA advocacy"
                 fill
                 className="object-cover rounded-2xl"
               />
@@ -89,4 +89,4 @@ export const WhoWeAre = () => {
       </div>
     </section>
   );
-}; 
+};

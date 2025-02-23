@@ -74,9 +74,9 @@ export const InnovationFund = () => {
               </div>
             </div>
 
-            <div className="relative h-[250px] md:h-auto md:aspect-[4/3] rounded-lg md:rounded-2xl overflow-hidden">
+            <div className="relative h-[350px] md:h-auto md:aspect-[4/4] rounded-lg md:rounded-2xl overflow-hidden">
               <Image
-                src="/images/innovation/building.jpg"
+                src="/images/random/img.jpg"
                 alt="Modern building"
                 fill
                 className="object-cover"

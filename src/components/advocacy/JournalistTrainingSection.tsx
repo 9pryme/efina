@@ -36,7 +36,7 @@ export const JournalistTrainingSection = () => {
               {/* Image */}
               <div className="relative h-[300px] md:h-full md:min-h-[400px]">
                 <Image
-                  src="/images/advocacy/journalist-training.jpg"
+                  src="/images/random/journalist-training.jpg"
                   alt="Journalist Training"
                   fill
                   className="object-cover"

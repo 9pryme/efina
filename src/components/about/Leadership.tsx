@@ -41,7 +41,7 @@ const leaders = [
   },
   {
     name: "Olu Akanmu",
-    title: "Chief Executive Officer",
+    title: "Board Member",
     bio: "Olu Akanmu was, until recently, President and Co-CEO of OPay-Nigeria, one of Nigeria's largest fintech platforms with Unicorn valuation. He has an unusual, diverse C-level strategic leadership experience across several industries, including healthcare (HMO), telecommunications, banking, retail, and non-profit sectors, with a track record of growing and scaling businesses successfully across these industries.",
     image: "/images/team/olu.jpg",
     linkedIn: "https://linkedin.com/in/olu-akanmu"
@@ -82,10 +82,9 @@ export const Leadership = () => {
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="font-display text-3xl md:text-[56px] leading-[1.2] mb-8 md:mb-16 text-gray-900"
+          className="font-display text-3xl md:text-[56px] leading-[1.2] mb-8 md:mb-16 text-gray-900 font-bold"
         >
           Our Leadership
         </motion.h2>
@@ -95,15 +94,10 @@ export const Leadership = () => {
             <motion.div
               key={leader.name}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
             >
-              <LeadershipCard 
-                {...leader} 
-                index={index}
-                total={leaders.length}
-              />
+              <LeadershipCard {...leader} />
             </motion.div>
           ))}
         </div>
