@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { AnnouncementBar } from './AnnouncementBar';
 import { NavigationMenu } from './NavigationMenu';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Button } from '@/src/components/ui/Button';
 import { Menu, X } from 'lucide-react';
 
@@ -74,12 +75,12 @@ export const Header = () => {
               >
                 Our new identity
               </Button> */}
-              <Button 
+              {/* <Button 
                 href="/contact"
                 variant="primary"
               >
                 Talk to us
-              </Button>
+              </Button> */}
             </div>
 
             {/* Mobile Menu Button */}
@@ -111,14 +112,14 @@ export const Header = () => {
                 >
                   Our new identity
                 </Button> */}
-                <Button 
+                {/* <Button 
                   href="/contact"
                   variant="primary"
                   className="w-full justify-center text-base py-3"
                   onClick={handleNavigate}
                 >
                   Talk to us
-                </Button>
+                </Button> */}
               </div>
             </div>
           )}
