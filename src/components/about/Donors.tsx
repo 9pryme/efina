@@ -22,14 +22,14 @@ const donors = [
 
 export const Donors = () => {
   return (
-    <section className="py-32 bg-gray-50">
+    <section className="py-16 md:py-32 bg-gray-50">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="font-display text-[56px] leading-[1.2] text-center mb-4 text-gray-900"
+          className="font-display text-[32px] md:text-[56px] leading-[1.2] text-center mb-4 text-gray-900"
         >
           Our donors
         </motion.h2>
@@ -38,12 +38,12 @@ export const Donors = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
-          className="text-gray-600 text-center mb-20 max-w-xl mx-auto"
+          className="text-gray-600 text-center mb-12 md:mb-20 max-w-xl mx-auto px-4"
         >
           Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.
         </motion.p>
 
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {donors.map((donor, index) => (
             <DonorCard
               key={donor.name}

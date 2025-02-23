@@ -20,8 +20,8 @@ const menuItems = {
   ourWork: {
     label: 'Our Work',
     items: [
-      { label: 'Advocacy & Capacity Building', href: '/advocacy', description: 'A tool for facilitating emergence' },
-      { label: 'Digital Financial Services', href: '/our-work/digital-services', description: 'To expand the access and reach' },
+      { label: 'Advocacy', href: '/our-work/advocacy', description: 'A tool for facilitating emergence' },
+      { label: 'Systems Strengthening', href: '/our-work/systems-engineering', description: 'To expand the access and reach' },
       { label: 'Innovation', href: '/our-work/innovation', description: 'To promote financial sector development' },
       { label: 'Research', href: '/our-work/research', description: 'Reliable data and analysis' },
     ],
@@ -32,12 +32,21 @@ const menuItems = {
   },
 };
 
-export const NavigationMenu = () => {
+interface NavigationMenuProps {
+  onNavigate?: () => void;
+}
+
+export const NavigationMenu = ({ onNavigate }: NavigationMenuProps) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
+  const handleNavigate = () => {
+    setActiveMenu(null);
+    onNavigate?.();
+  };
+
   return (
-    <nav className="flex items-center">
-      <ul className="flex gap-8">
+    <nav>
+      <ul className="flex flex-col md:flex-row md:gap-8">
         {Object.entries(menuItems).map(([key, item]) => (
           <li 
             key={key}
@@ -47,18 +56,25 @@ export const NavigationMenu = () => {
           >
             {'items' in item ? (
               <>
-                <button className="flex items-center gap-1 text-gray-900 hover:text-gray-900 transition-colors">
+                <button 
+                  className="flex items-center justify-between w-full md:w-auto gap-1 text-gray-900 hover:text-gray-900 transition-colors px-4 md:px-0"
+                  onClick={() => setActiveMenu(activeMenu === key ? null : key)}
+                >
                   {item.label}
-                  <ChevronDown size={16} className="text-gray-500" />
+                  <ChevronDown 
+                    size={16} 
+                    className={`text-gray-500 transform transition-transform ${activeMenu === key ? 'rotate-180' : ''}`} 
+                  />
                 </button>
                 {activeMenu === key && (
-                  <div className="absolute top-full left-0 w-[400px] bg-white shadow-lg rounded-lg overflow-hidden py-4 mt-1">
+                  <div className="md:absolute md:top-full md:left-0 w-full md:w-[400px] bg-gray-50 md:bg-white md:shadow-lg md:rounded-lg overflow-hidden py-2 md:py-4 md:mt-1">
                     <div className="grid gap-2">
                       {item.items.map((subItem) => (
                         <Link
                           key={subItem.href}
                           href={subItem.href}
-                          className="block px-4 py-2 hover:bg-gray-50"
+                          className="block px-6 md:px-4 py-2 hover:bg-gray-100 md:hover:bg-gray-50"
+                          onClick={handleNavigate}
                         >
                           <div className="text-gray-900 font-medium mb-1">{subItem.label}</div>
                           <div className="text-gray-500 text-sm">{subItem.description}</div>
@@ -71,7 +87,8 @@ export const NavigationMenu = () => {
             ) : (
               <Link
                 href={item.href}
-                className="text-gray-900 hover:text-gray-900 transition-colors"
+                className="block px-4 md:px-0 text-gray-900 hover:text-gray-900 transition-colors"
+                onClick={handleNavigate}
               >
                 {item.label}
               </Link>

@@ -13,14 +13,14 @@ export const AnnouncementBar = () => {
     <div className="bg-[#E5F2F0] py-2">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center relative">
-          <div className="flex items-center gap-2">
-            <span className="text-gray-900 text-sm">EFInA Annual Impact Meet up- </span>
-            <span className="text-gray-900 text-sm font-medium">February 2025</span>
+          <div className="flex items-center gap-2 max-w-[calc(100%-32px)]">
+            <span className="text-gray-900 text-[10px] md:text-sm truncate">Financial Inclusion and Economic Empowerment Priorities for Nigeria </span>
+            <span className="text-gray-900 text-[10px] md:text-sm font-medium whitespace-nowrap"></span>
             <Link 
-              href="/register" 
-              className="text-[#B91810] text-sm font-medium hover:underline ml-4"
+              href="https://youtu.be/Hs_FWUMzVEk" 
+              className="text-[#B91810] text-[10px] md:text-sm font-medium hover:underline ml-4 whitespace-nowrap"
             >
-              Register now →
+              Watch Now→
             </Link>
           </div>
           <button 

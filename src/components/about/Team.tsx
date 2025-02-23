@@ -69,19 +69,19 @@ const team = [
 
 export const Team = () => {
   return (
-    <section className="py-32 bg-white">
+    <section className="py-16 md:py-32 bg-white">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="font-display text-[56px] leading-[1.2] text-left mb-20 text-gray-900"
+          className="font-display text-[32px] md:text-[56px] leading-[1.2] text-left mb-10 md:mb-20 text-gray-900"
         >
           Meet the people who <br /> drive our initiatives forward
         </motion.h2>
 
-        <div className="grid grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-8">
           {team.map((member, index) => (
             <TeamCard
               key={index}

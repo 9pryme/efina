@@ -38,25 +38,25 @@ export const StatsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="font-display text-4xl text-center mb-16 text-gray-900 font-bold">
+        <h2 className="font-display text-3xl md:text-4xl text-center mb-8 md:mb-16 text-gray-900 font-bold">
           EFInA&apos;s Impact
         </h2>
 
-        <div className="grid grid-cols-4 gap-6 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 items-center">
           <motion.div
             key={stats[0].label}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gray-100 rounded-3xl p-8 flex flex-col items-center justify-center text-center h-[364px] hover:bg-gray-200 transition-colors duration-300"
+            className="bg-gray-100 rounded-3xl p-6 md:p-8 flex flex-col items-center justify-center text-center h-[250px] md:h-[364px] hover:bg-gray-200 transition-colors duration-300"
           >
-            <div className="font-display text-4xl mb-3 flex items-baseline text-gray-900 font-bold">
+            <div className="font-display text-3xl md:text-4xl mb-3 flex items-baseline text-gray-900 font-bold">
               {stats[0].prefix && (
-                <span className="text-2xl mr-1 font-bold">{stats[0].prefix}</span>
+                <span className="text-xl md:text-2xl mr-1 font-bold">{stats[0].prefix}</span>
               )}
-              <span className="text-5xl font-bold">{stats[0].value}</span>
-              <span className="text-5xl font-bold">{stats[0].unit}</span>
+              <span className="text-4xl md:text-5xl font-bold">{stats[0].value}</span>
+              <span className="text-4xl md:text-5xl font-bold">{stats[0].unit}</span>
               {stats[0].suffix && (
                 <span className="font-bold">{stats[0].suffix}</span>
               )}
@@ -66,20 +66,20 @@ export const StatsSection = () => {
             </p>
           </motion.div>
 
-          <div className="col-span-2 space-y-6">
+          <div className="col-span-1 md:col-span-2 space-y-4 md:space-y-6">
             {[stats[1], stats[2]].map((stat) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-gray-100 rounded-3xl p-8 flex flex-col items-center justify-center text-center h-[200px] hover:bg-gray-200 transition-colors duration-300"
+                className="bg-gray-100 rounded-3xl p-6 md:p-8 flex flex-col items-center justify-center text-center h-[180px] md:h-[200px] hover:bg-gray-200 transition-colors duration-300"
               >
-                <div className="font-display text-4xl mb-3 flex items-baseline text-gray-900 font-bold">
+                <div className="font-display text-3xl md:text-4xl mb-3 flex items-baseline text-gray-900 font-bold">
                   {stat.prefix && (
-                    <span className="text-2xl mr-1 font-bold">{stat.prefix}</span>
+                    <span className="text-xl md:text-2xl mr-1 font-bold">{stat.prefix}</span>
                   )}
-                  <span className="text-5xl font-bold">{stat.value}</span>
-                  <span className="text-5xl font-bold">{stat.unit}</span>
+                  <span className="text-4xl md:text-5xl font-bold">{stat.value}</span>
+                  <span className="text-4xl md:text-5xl font-bold">{stat.unit}</span>
                   {stat.suffix && (
                     <span className="font-bold">{stat.suffix}</span>
                   )}
@@ -95,14 +95,14 @@ export const StatsSection = () => {
             key={stats[3].label}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gray-100 rounded-3xl p-8 flex flex-col items-center justify-center text-center h-[364px] hover:bg-gray-200 transition-colors duration-300"
+            className="bg-gray-100 rounded-3xl p-6 md:p-8 flex flex-col items-center justify-center text-center h-[250px] md:h-[364px] hover:bg-gray-200 transition-colors duration-300"
           >
-            <div className="font-display text-4xl mb-3 flex items-baseline text-gray-900 font-bold">
+            <div className="font-display text-3xl md:text-4xl mb-3 flex items-baseline text-gray-900 font-bold">
               {stats[3].prefix && (
-                <span className="text-2xl mr-1 font-bold">{stats[3].prefix}</span>
+                <span className="text-xl md:text-2xl mr-1 font-bold">{stats[3].prefix}</span>
               )}
-              <span className="text-5xl font-bold">{stats[3].value}</span>
-              <span className="text-5xl font-bold">{stats[3].unit}</span>
+              <span className="text-4xl md:text-5xl font-bold">{stats[3].value}</span>
+              <span className="text-4xl md:text-5xl font-bold">{stats[3].unit}</span>
               {stats[3].suffix && (
                 <span className="font-bold">{stats[3].suffix}</span>
               )}

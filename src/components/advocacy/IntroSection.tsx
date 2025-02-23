@@ -10,22 +10,22 @@ const beliefs = [
 
 export const IntroSection = () => {
   return (
-    <section className="py-12 bg-white">
+    <section className="py-8 md:py-12 bg-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl">
-          <p className="text-lg text-gray-700 leading-relaxed">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-base md:text-lg text-gray-700 leading-relaxed">
             The capacity of financial services regulators and policy makers to develop an enabling environment for innovation and financial inclusion is an essential part of the development of the financial sector.
           </p>
-          <p className="text-lg text-gray-700 leading-relaxed mt-4">
+          <p className="text-base md:text-lg text-gray-700 leading-relaxed mt-4">
             EFInA works closely with regulators and policy makers in Nigeria to foster an environment that supports the growth and development of innovative inclusive financial services for the unbanked and under-banked.
           </p>
         </div>
 
-        <div className="max-w-6xl mt-16">
-          <h2 className="text-2xl font-display text-gray-900 mb-8">
+        <div className="max-w-6xl mt-12 md:mt-16">
+          <h2 className="text-xl md:text-2xl font-display text-gray-900 mb-6 md:mb-8">
             EFInA believes that
           </h2>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {beliefs.map((belief, index) => (
               <BeliefCard 
                 key={index}

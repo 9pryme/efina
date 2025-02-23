@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export const FinancialInclusion = () => {
   return (
-    <section className="relative bg-[#008F60] text-white h-[700px] flex items-center">
+    <section className="relative bg-[#008F60] text-white min-h-[500px] md:h-[700px] flex items-center py-16 md:py-0">
       {/* Background Pattern */}
       <div className="absolute bottom-0 left-0 right-0">
         <Image
@@ -25,11 +25,11 @@ export const FinancialInclusion = () => {
           viewport={{ once: true }}
           className="max-w-4xl"
         >
-          <h2 className="font-display text-[56px] leading-[1.2] mb-8">
+          <h2 className="font-display text-3xl md:text-[56px] leading-[1.2] mb-6 md:mb-8">
             What is Financial Inclusion?
           </h2>
           
-          <div className="space-y-8 text-xl">
+          <div className="space-y-6 md:space-y-8 text-base md:text-xl">
             <p>
               Financial inclusion is the provision of a broad range of high quality financial products, such as savings, credit, insurance, payments and pensions, which are relevant, appropriate and affordable for the entire adult population, especially the low income segment.
             </p>

@@ -51,24 +51,24 @@ export default function InsightDetailPage() {
         image={insight.image}
       />
       
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Left Sidebar - Meta Info */}
-          <div className="col-span-4">
-            <div className="sticky top-8">
+      <div className="container mx-auto px-4 py-8 sm:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          {/* Main Content */}
+          <div className="lg:col-span-8 order-1">
+            <div className="lg:max-h-[calc(100vh-200px)] lg:overflow-y-auto lg:pr-8">
+              <div className="text-black">
+                <InsightContent content={insight.content} />
+              </div>
+            </div>
+          </div>
+
+          {/* Meta Info - Full width on mobile, sidebar on desktop */}
+          <div className="lg:col-span-4 order-2">
+            <div className="lg:sticky lg:top-8">
               <InsightMeta 
                 author={insight.author}
                 date={insight.date}
               />
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div className="col-span-8">
-            <div className="max-h-[calc(100vh-200px)] overflow-y-auto pr-8">
-              <div className="text-black">
-                <InsightContent content={insight.content} />
-              </div>
             </div>
           </div>
         </div>

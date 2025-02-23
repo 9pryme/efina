@@ -109,13 +109,13 @@ export const Focus = () => {
               ref={(el) => {
                 if (el) cardsRef.current[index] = el;
               }}
-              className={`rounded-3xl overflow-hidden mx-auto ${area.width} transition-transform duration-700 translate-y-full`}
+              className={`rounded-3xl overflow-hidden mx-auto ${area.width} transition-transform duration-700 translate-y-full max-md:!w-[calc(100%-2rem)]`}
               style={{
                 position: 'sticky',
                 top: `calc(20vh + ${index * 8}px)`,
               }}
             >
-              <div className={`grid grid-cols-2 ${area.color} h-[456px]`}>
+              <div className={`grid md:grid-cols-2 ${area.color} h-[456px] max-md:h-auto`}>
                 <div className={`p-12 ${area.textColor || 'text-white'} flex flex-col justify-between`}>
                   <div>
                     <h3 className="font-display text-[32px] mb-4 font-bold tracking-[-0.04em]">{area.title}</h3>
@@ -123,12 +123,12 @@ export const Focus = () => {
                   </div>
                   <Link 
                     href={area.link}
-                    className={`inline-flex items-center text-sm border ${area.textColor ? 'border-black/30' : 'border-white/30'} rounded-full px-6 py-2 ${area.textColor ? 'hover:bg-black/10' : 'hover:bg-white/10'} transition-colors w-fit`}
+                    className={`inline-flex items-center text-sm border ${area.textColor ? 'border-black/30' : 'border-white/30'} rounded-full px-6 py-2 ${area.textColor ? 'hover:bg-black/10' : 'hover:bg-white/10'} transition-colors w-fit max-md:mt-8`}
                   >
                     {area.buttonText}
                   </Link>
                 </div>
-                <div className="relative h-full">
+                <div className="relative h-full max-md:hidden">
                   <Image
                     src={area.image}
                     alt={area.title}

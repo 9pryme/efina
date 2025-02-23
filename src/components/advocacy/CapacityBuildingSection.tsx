@@ -16,11 +16,11 @@ const ServiceCard = ({ number, title, description, index }: ServiceCardProps) =>
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="bg-[#1A1A1A] rounded-lg p-8"
+      className="bg-[#1A1A1A] rounded-lg p-4 md:p-8"
     >
-      <div className="text-gray-600 text-sm mb-6">{number}</div>
-      <h3 className="text-2xl font-display text-white mb-4">{title}</h3>
-      <p className="text-gray-400">{description}</p>
+      <div className="text-gray-600 text-xs md:text-sm mb-4 md:mb-6">{number}</div>
+      <h3 className="text-xl md:text-2xl font-display text-white mb-3 md:mb-4">{title}</h3>
+      <p className="text-sm md:text-base text-gray-400">{description}</p>
     </motion.div>
   );
 };
@@ -45,16 +45,16 @@ const services = [
 
 export const CapacityBuildingSection = () => {
   return (
-    <section className="py-24 bg-black">
+    <section className="py-12 md:py-24 bg-black">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-16">
+          <div className="mb-8 md:mb-16">
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="text-[56px] font-display text-white mb-6"
+              className="text-3xl md:text-[56px] font-display text-white mb-4 md:mb-6"
             >
               Capacity Building
             </motion.h2>
@@ -63,19 +63,19 @@ export const CapacityBuildingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="text-xl text-gray-400"
+              className="text-base md:text-xl text-gray-400"
             >
               Our Capacity Building efforts are tailored towards Financial Services Providers (FSPs) and Regulators and Journalists.
             </motion.p>
           </div>
 
-          <div className="mb-16">
+          <div className="mb-8 md:mb-16">
             <motion.h3
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-2xl font-display text-white mb-4"
+              className="text-xl md:text-2xl font-display text-white mb-3 md:mb-4"
             >
               Financial Service Providers and Regulators
             </motion.h3>
@@ -84,13 +84,13 @@ export const CapacityBuildingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="text-gray-400 mb-8"
+              className="text-sm md:text-base text-gray-400 mb-6 md:mb-8"
             >
               Our capacity building efforts for FSPs and Regulators are further categorised as follows:
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {services.map((service, index) => (
               <ServiceCard 
                 key={index}

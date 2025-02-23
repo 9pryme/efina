@@ -18,7 +18,10 @@ export const InsightHeader = ({ category, title, date, image }: InsightHeaderPro
       image={image}
       showBackButton
       backButtonLink="/insights"
-      imageHeight="h-[600px]"
+      imageHeight="h-[300px] md:h-[600px]"
+      titleClassName="text-xl md:text-4xl" // Smaller font on mobile, larger on desktop
+      categoryClassName="text-sm md:text-base" // Smaller category text on mobile
+      dateClassName="text-sm md:text-base" // Smaller date text on mobile
     />
   );
-}; 
+};

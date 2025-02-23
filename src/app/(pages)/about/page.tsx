@@ -11,7 +11,10 @@ import { Partners } from '@/src/components/shared/Partners';
 export default function About() {
   return (
     <main>
-      <AboutHero />
+      <AboutHero 
+        title="About"
+        description="Enhancing Financial Innovation & Access (EFInA) is a Financial Sector Deepening (FSD) organisation"
+      />
       <WhoWeAre />
       <FinancialInclusion />
       <Established />

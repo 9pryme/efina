@@ -9,9 +9,9 @@ const bottomValues = ['Objectivity', 'Integrity', 'Commitment'];
 
 export const Values = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-12 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 gap-20 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 mb-12 md:mb-16">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ export const Values = () => {
               OUR VALUES
             </motion.span>
             
-            <h2 className="font-display text-[44px] leading-[1.2] text-gray-900">
+            <h2 className="font-display text-[32px] md:text-[44px] leading-[1.2] text-gray-900">
               We are deeply committed to equity between men and women and supporting the vulnerable and marginalised.
             </h2>
           </motion.div>
@@ -41,7 +41,7 @@ export const Values = () => {
             viewport={{ once: true }}
             className="flex items-center justify-center"
           >
-            <div className="relative rounded-full overflow-hidden w-[400px] h-[400px]">
+            <div className="relative rounded-full overflow-hidden w-[280px] h-[280px] md:w-[400px] md:h-[400px]">
               <Image
                 src="/images/about/values.jpg"
                 alt="Diverse group of people"
@@ -59,13 +59,13 @@ export const Values = () => {
           items={topValues}
           direction="right"
           speed={30}
-          className="mb-4 font-raleway tracking-[-4px] font-bold"
+          className="mb-4 font-raleway tracking-[-2px] md:tracking-[-4px] font-bold text-[40px] md:text-[80px]"
         />
         <Marquee 
           items={bottomValues}
           direction="left"
           speed={30}
-          className="font-raleway tracking-[-4px] font-bold"
+          className="font-raleway tracking-[-2px] md:tracking-[-4px] font-bold text-[40px] md:text-[80px]"
         />
       </div>
     </section>

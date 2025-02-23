@@ -16,14 +16,14 @@ const GrantCard = ({ title, description, index }: GrantCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="bg-white rounded-lg p-8 space-y-6"
+      className="bg-white rounded-lg p-4 md:p-8 space-y-4 md:space-y-6"
     >
-      <div className="w-3 h-3 rounded-full bg-red-500" />
-      <h3 className="text-2xl font-display font-bold text-gray-900">{title}</h3>
-      <p className="text-gray-700">{description}</p>
+      <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-red-500" />
+      <h3 className="text-xl md:text-2xl font-display font-bold text-gray-900">{title}</h3>
+      <p className="text-sm md:text-base text-gray-700">{description}</p>
       <Link 
         href="#"
-        className="inline-flex items-center text-gray-900 font-medium hover:text-gray-600"
+        className="inline-flex items-center text-sm md:text-base text-gray-900 font-medium hover:text-gray-600"
       >
         Learn More
         <span className="ml-2">→</span>
@@ -49,7 +49,7 @@ const grants = [
 
 export const GrantTypes = () => {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-12 md:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <motion.h2
@@ -57,12 +57,12 @@ export const GrantTypes = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-4xl font-display font-bold text-center text-gray-900 mb-16"
+            className="text-2xl md:text-4xl font-display font-bold text-center text-gray-900 mb-8 md:mb-16"
           >
-            The Innovation Fund <br /> offers three types of grants
+            The Innovation Fund <br className="hidden md:block" /> offers three types of grants
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {grants.map((grant, index) => (
               <GrantCard 
                 key={index}

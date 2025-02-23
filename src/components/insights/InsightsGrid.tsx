@@ -52,6 +52,7 @@ const insights = [
 export const InsightsGrid = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
   const itemsPerPage = 6;
   const totalPages = Math.ceil(insights.length / itemsPerPage);
   
@@ -66,17 +67,17 @@ export const InsightsGrid = () => {
   );
 
   return (
-    <section className="py-32">
+    <section className="py-8 md:py-32">
       <div className="container mx-auto px-4">
         {/* Filters */}
-        <div className="flex items-center justify-between mb-12">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-row md:flex-row md:items-center justify-between gap-4 mb-8 md:mb-12">
+          <div className="flex flex-row md:flex-row items-center gap-4 flex-1">
             {/* Category Filter */}
-            <div className="relative">
+            <div className="relative flex-1 md:flex-none md:w-auto">
               <select 
-                className="appearance-none bg-white rounded-full px-6 py-3 pr-12 border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-300"
+                className="w-full md:w-auto appearance-none bg-white rounded-full px-6 py-3 pr-12 border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-300"
               >
-                <option value="">Select Category</option>
+                <option value="">Category</option>
                 <option value="news">News</option>
                 <option value="events">Events</option>
                 <option value="publications">Publications</option>
@@ -86,11 +87,11 @@ export const InsightsGrid = () => {
             </div>
 
             {/* Year Filter */}
-            <div className="relative">
+            <div className="relative flex-1 md:flex-none md:w-auto">
               <select 
-                className="appearance-none bg-white rounded-full px-6 py-3 pr-12 border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-300"
+                className="w-full md:w-auto appearance-none bg-white rounded-full px-6 py-3 pr-12 border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-300"
               >
-                <option value="">Select year</option>
+                <option value="">Year</option>
                 <option value="2024">2024</option>
                 <option value="2023">2023</option>
                 <option value="2022">2022</option>
@@ -101,23 +102,48 @@ export const InsightsGrid = () => {
 
           {/* Search */}
           <div className="relative">
-            <input
-              type="text"
-              placeholder="Search for anything"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-[300px] bg-white rounded-full px-6 py-3 pl-12 border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-300"
-            />
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            {/* Mobile Search Icon */}
+            <button 
+              className="md:hidden w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center"
+              onClick={() => setShowMobileSearch(!showMobileSearch)}
+            >
+              <Search className="text-gray-400" size={20} />
+            </button>
+
+            {/* Mobile Search Input */}
+            {showMobileSearch && (
+              <div className="absolute right-0 top-14 w-[280px] md:hidden">
+                <input
+                  type="text"
+                  placeholder="Search for anything"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-white rounded-full px-6 py-3 pl-12 border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-300"
+                />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              </div>
+            )}
+
+            {/* Desktop Search */}
+            <div className="hidden md:block">
+              <input
+                type="text"
+                placeholder="Search for anything"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-[300px] bg-white rounded-full px-6 py-3 pl-12 border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-300"
+              />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+            </div>
           </div>
         </div>
 
         {/* Results Count */}
-        <div className="flex items-center justify-between mb-8">
-          <p className="text-gray-600">Showing {((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, insights.length)} Of {insights.length} Results.</p>
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+          <p className="text-gray-600 text-sm md:text-base">Showing {((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, insights.length)} Of {insights.length} Results.</p>
           <div className="relative">
             <select 
-              className="appearance-none bg-transparent text-gray-900 pr-6 focus:outline-none"
+              className="appearance-none bg-transparent text-gray-900 pr-6 focus:outline-none text-sm md:text-base"
             >
               <option value="newest">Sort by: Newest</option>
               <option value="oldest">Sort by: Oldest</option>
@@ -127,7 +153,7 @@ export const InsightsGrid = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {paginatedInsights.map((insight, index) => (
             <InsightCard 
               key={insight.href}
@@ -138,7 +164,7 @@ export const InsightsGrid = () => {
         </div>
 
         {/* Pagination */}
-        <div className="flex justify-center items-center mt-12">
+        <div className="flex justify-center items-center mt-8 md:mt-12">
           <div className="inline-flex items-center gap-1 border border-gray-200 rounded-full px-2 py-1">
             <button
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
@@ -152,7 +178,7 @@ export const InsightsGrid = () => {
               <button
                 key={page}
                 onClick={() => setCurrentPage(Number(page))}
-                className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-colors ${
                   currentPage === page 
                     ? 'bg-gray-900 text-white' 
                     : 'text-gray-900 hover:bg-gray-50'

@@ -2,12 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { LeadershipCard } from './LeadershipCard';
-import { useEffect, useRef } from 'react';
 
 const leaders = [
   {
     name: "HRH Sanusi Lamido Sanusi CON",
-    title: "Board Member",
+    title: "Board Member", 
     bio: "HRH Sanusi Lamido Sanusi, Emir of Kano, is a renowned economist, banker, and thought leader in financial inclusion and economic development. As a former Governor of the Central Bank of Nigeria, he spearheaded critical banking reforms that strengthened Nigeria's financial system. He is a strong advocate for inclusive finance, economic policy reforms, and social equity. HRH Sanusi's extensive experience in governance, risk management, and regulatory affairs continues to shape financial sector transformation across Africa.",
     image: "/images/team/sanusi.jpg",
     linkedIn: "https://linkedin.com/in/sanusi-lamido-sanusi"
@@ -78,87 +77,34 @@ const leaders = [
 ];
 
 export const Leadership = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const cards = cardsRef.current.filter(Boolean);
-    if (!section || cards.length === 0) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('sticky');
-          entry.target.classList.remove('translate-y-full');
-        }
-      });
-    }, {
-      root: null,
-      threshold: 0.1,
-      rootMargin: '0px 0px -20% 0px'
-    });
-
-    cards.forEach((card) => {
-      if (card) observer.observe(card);
-    });
-
-    const handleScroll = () => {
-      const lastCard = cards[cards.length - 1];
-      if (!lastCard) return;
-
-      const sectionBottom = section.offsetTop + section.offsetHeight;
-      const scrollPosition = window.scrollY + window.innerHeight;
-      
-      if (scrollPosition >= sectionBottom) {
-        lastCard.style.position = 'absolute';
-        lastCard.style.top = `calc(100% - ${lastCard.offsetHeight}px - 40vh)`;
-      } else {
-        lastCard.style.position = 'sticky';
-        lastCard.style.top = `calc(20vh + ${(cards.length - 1) * 8}px)`;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
-    <section ref={sectionRef} className="py-20 bg-white min-h-screen">
+    <section className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="font-display text-[56px] leading-[1.2] mb-16 text-gray-900"
+          className="font-display text-3xl md:text-[56px] leading-[1.2] mb-8 md:mb-16 text-gray-900"
         >
           Our Leadership
         </motion.h2>
 
-        <div className="relative space-y-[calc(60vh-10px)] pb-[40vh]">
+        <div className="grid grid-cols-1 gap-8">
           {leaders.map((leader, index) => (
-            <div
+            <motion.div
               key={leader.name}
-              ref={(el) => {
-                if (el) cardsRef.current[index] = el;
-              }}
-              className="transition-transform duration-700 translate-y-full"
-              style={{
-                position: 'sticky',
-                top: `calc(20vh + ${index * 8}px)`,
-              }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
             >
               <LeadershipCard 
                 {...leader} 
                 index={index}
                 total={leaders.length}
               />
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
