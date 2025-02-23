@@ -1,0 +1,90 @@
+'use client';
+
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+
+const aims = [
+  "Generate and pilot new ideas and business models that increase access to financial services for low income customers that are unbanked and under-banked",
+  "Support projects that extend the provision of inclusive financial services",
+  "Maximize the impact of EFInA's Innovation Fund by supporting innovative projects that have good potential for replication"
+];
+
+export const InnovationFund = () => {
+  return (
+    <section className="py-24 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-4xl font-display text-gray-900 mb-8"
+          >
+            Innovation Fund
+          </motion.h2>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div className="space-y-8">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="text-gray-700"
+              >
+                EFInA launched our Innovation Fund to encourage financial services providers to develop and launch products and services targeting the unbanked and under-banked low income segment. The Innovation Fund seeks to support new ideas and approaches to expanding financial access to the unbanked and under-banked population in Nigeria.
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-gray-700"
+              >
+                As innovation involves taking risks, EFInA shares the risk of developing and implementing innovative products by providing grant subsidies for commercial and policy related initiatives. Innovation is sometimes hard to define, and therefore difficult for prospective bidders to address. The EFInA Innovation Fund focuses on novel ways of providing access to financial services in Nigeria, rather than replicating existing approaches.
+              </motion.p>
+
+              <div className="space-y-4">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  viewport={{ once: true }}
+                  className="font-medium text-gray-900"
+                >
+                  It aims to:
+                </motion.p>
+                <ul className="space-y-4">
+                  {aims.map((aim, index) => (
+                    <motion.li
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.4 + (index * 0.1) }}
+                      viewport={{ once: true }}
+                      className="flex items-start gap-3 text-gray-700"
+                    >
+                      <span className="w-2 h-2 rounded-full bg-red-500 mt-2 flex-shrink-0" />
+                      {aim}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+              <Image
+                src="/images/innovation/building.jpg"
+                alt="Modern building"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}; 
