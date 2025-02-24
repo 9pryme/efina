@@ -1,11 +1,11 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { CloudinaryImage } from '@/src/components/ui/CloudinaryImage';
 
 const aims = [
   "Generate and pilot new ideas and business models that increase access to financial services for low income customers that are unbanked and under-banked",
-  "Support projects that extend the provision of inclusive financial services",
+  "Support projects that extend the provision of inclusive financial services", 
   "Maximize the impact of EFInA's Innovation Fund by supporting innovative projects that have good potential for replication"
 ];
 
@@ -75,8 +75,8 @@ export const InnovationFund = () => {
             </div>
 
             <div className="relative h-[350px] md:h-auto md:aspect-[4/4] rounded-lg md:rounded-2xl overflow-hidden">
-              <Image
-                src="/images/random/img.jpg"
+              <CloudinaryImage
+                src="v1740330346/random/img"
                 alt="Modern building"
                 fill
                 className="object-cover"

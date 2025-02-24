@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CloudinaryImage } from '@/src/components/ui/CloudinaryImage';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -29,8 +29,8 @@ export const LeadershipCard = ({ name, title, bio, image, linkedIn }: Leadership
     >
       {/* Image */}
       <div className="relative w-full aspect-square md:w-[200px] md:h-[240px] shrink-0">
-        <Image
-          src={image}
+        <CloudinaryImage
+          src={image.replace('/images/', '')}
           alt={name}
           fill
           className="object-cover rounded-xl"

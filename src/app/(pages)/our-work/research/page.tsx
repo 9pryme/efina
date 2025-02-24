@@ -8,7 +8,7 @@ export default function ResearchPage() {
       <AdvocacyHero 
         title="Research"
         description="One of the biggest hurdles to improving access to retail financial services is the absence of relevant and reliable data and analysis about how individuals and households manage their finances."
-        bannerImage="/images/banners/research.png"
+        bannerImage="raovhmqabae7wlupjoco"
       />
       <ResearchIntro />
       <ResearchCards />

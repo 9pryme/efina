@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { CloudinaryImage } from '@/src/components/ui/CloudinaryImage';
 import { AnnouncementBar } from './AnnouncementBar';
 import { NavigationMenu } from './NavigationMenu';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -52,8 +52,8 @@ export const Header = () => {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link href="/" className="relative w-24 md:w-32 h-8 md:h-12" onClick={handleNavigate}>
-              <Image
-                src="/images/efina-logo.svg"
+              <CloudinaryImage
+                src="efina-logo"
                 alt="EFInA Logo"
                 fill
                 className="object-contain"

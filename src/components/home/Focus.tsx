@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
+import { CloudinaryImage } from '@/src/components/ui/CloudinaryImage';
 
 const focusAreas = [
   {
@@ -10,7 +10,7 @@ const focusAreas = [
     description: "We have conducted several quantitative and qualitative studies covering demand on both sides",
     buttonText: "Read our Research", 
     color: "bg-[#008F60]",
-    image: "/images/focus/research.jpg",
+    image: "focus/research",
     link: "/research",
     width: "w-[898px]"
   },
@@ -19,16 +19,16 @@ const focusAreas = [
     description: "The innovation forum was designed to trigger debate, disseminate information and stimulate ideas",
     buttonText: "Read about our innovations",
     color: "bg-[#DA2734]",
-    image: "/images/focus/innovation.jpg", 
+    image: "focus/innovation",
     link: "/innovation",
     width: "w-[952px]"
   },
   {
-    title: "Systems Engineering",
+    title: "Systems Strengthening",
     description: "As a market Facilitator, EFInA provides capacity building and technical advisory to eco-system stakeholders",
     buttonText: "More info on DSF",
     color: "bg-[#FABA13]",
-    image: "/images/focus/dfs.jpg",
+    image: "focus/dfs",
     link: "/dfs",
     textColor: "text-black",
     width: "w-[1006px]"
@@ -38,7 +38,7 @@ const focusAreas = [
     description: "We facilitate the emergence of an all-inclusive and growth promoting financial system in Nigeria.",
     buttonText: "Read more on this",
     color: "bg-gray-100",
-    image: "/images/focus/advocacy.jpg",
+    image: "focus/advocacy",
     link: "/advocacy",
     textColor: "text-black",
     width: "w-[1060px]"
@@ -129,7 +129,7 @@ export const Focus = () => {
                   </Link>
                 </div>
                 <div className="relative h-full max-md:hidden">
-                  <Image
+                  <CloudinaryImage
                     src={area.image}
                     alt={area.title}
                     fill

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Button } from '@/src/components/ui/Button';
+import { CloudinaryImage } from '@/src/components/ui/CloudinaryImage';
 
 const footerLinks = [
   { label: 'Who we are', href: '/who-we-are' },
@@ -67,14 +68,14 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-8 md:py-16">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-0">
           {/* Left Side - Logo */}
-          <Link href="/" className="mb-6 md:mb-0">
-            <Image
-              src="/images/efina-logo-white.svg"
+          <div className="relative w-32 md:w-40 h-12">
+            <CloudinaryImage
+              src="efina-logo-white"
               alt="EFInA Logo"
-              width={120}
-              height={36}
+              fill
+              className="object-contain"
             />
-          </Link>
+          </div>
 
           {/* Center - Navigation */}
           <nav className="w-full md:w-auto">

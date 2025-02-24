@@ -49,11 +49,7 @@ const cards = [
         href: "#"
       }
     ],
-    isDark: true,
-    image: {
-      src: "/images/research/library.jpg",
-      alt: "Library"
-    }
+    isDark: true
   }
 ];
 

@@ -1,6 +1,7 @@
 'use client';
 
-import Image from 'next/image';
+import { CloudinaryImage } from '@/src/components/ui/CloudinaryImage';
+import { cleanWordPressContent } from '@/src/lib/utils';
 
 interface StructuredContent {
   title: string;
@@ -49,41 +50,23 @@ export const InsightContent = ({ content }: InsightContentProps) => {
 
       {/* Content Sections */}
       {content.sections.map((section, index) => (
-        <div key={index} className="mb-8 sm:mb-12">
-          {/* Section Heading */}
-          {section.heading && (
-            <h2 className="text-xl sm:text-2xl font-display text-gray-900 mb-4 sm:mb-6">
-              {section.heading}
-            </h2>
-          )}
-
-          {/* Section Content */}
-          <div className="space-y-4 sm:space-y-6 text-gray-900">
-            {section.content.split('\n\n').map((paragraph, pIndex) => (
-              <p key={pIndex} className="leading-relaxed text-base sm:text-lg">{paragraph}</p>
-            ))}
-          </div>
-
-          {/* Section Image */}
+        <div key={index} className="mb-8">
           {section.image && (
-            <figure className="my-6 sm:my-8">
-              <div className="relative aspect-[16/9] rounded-lg overflow-hidden">
-                <Image
-                  src={section.image.src}
-                  alt={section.image.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                  className="object-cover"
-                  priority={index === 0}
-                />
-              </div>
+            <div className="relative h-64 mb-4">
+              <CloudinaryImage
+                src={section.image.src}
+                alt={section.image.alt}
+                fill
+                className="object-cover rounded-lg"
+              />
               {section.image.caption && (
-                <figcaption className="mt-2 sm:mt-3 text-xs sm:text-sm text-gray-500 text-center">
-                  {section.image.caption}
-                </figcaption>
+                <p className="text-sm text-gray-600 mt-2">{section.image.caption}</p>
               )}
-            </figure>
+            </div>
           )}
+          <div dangerouslySetInnerHTML={{ 
+            __html: cleanWordPressContent(section.content)
+          }} />
         </div>
       ))}
     </article>

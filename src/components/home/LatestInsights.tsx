@@ -1,34 +1,44 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { CloudinaryImage } from '@/src/components/ui/CloudinaryImage';
 import { Button } from '@/src/components/ui/Button';
-
-const insights = [
-  {
-    type: 'Event',
-    date: 'Friday, April 8, 2022',
-    title: 'EFInA Wants Barriers to Financial Inclusion for Women Removed',
-    image: '/images/hero-bg.jpg',
-    slug: '/insights/efina-women-financial-inclusion'
-  },
-  {
-    type: 'Press Statement',
-    date: 'Friday, April 8, 2022',
-    title: 'EFInA Wants Barriers to Financial Inclusion for Women Removed',
-    image: '/images/hero-bg.jpg',
-    slug: '/insights/efina-press-statement'
-  },
-  {
-    type: 'Report',
-    date: 'Friday, April 8, 2022',
-    title: 'EFInA 2022-2023 Impact report on financial inclusion for all campaign',
-    image: '/images/hero-bg.jpg',
-    slug: '/insights/efina-impact-report-2022-2023'
-  }
-];
+import { Post } from '@/src/types/wordpress';
+import { getPosts } from '@/src/lib/wordpress';
 
 export const LatestInsights = () => {
+  const [latestPosts, setLatestPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const posts = await getPosts();
+        // Get the 3 most recent posts
+        setLatestPosts(posts.slice(0, 3));
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  // Map WordPress categories to types
+  const getPostType = (post: Post) => {
+    const category = post.categories.nodes[0]?.name || '';
+    switch (category.toLowerCase()) {
+      case 'events':
+        return { type: 'Event', color: 'text-[#B01F29]' };
+      case 'press':
+      case 'press-release':
+      case 'press-statement':
+        return { type: 'Press Statement', color: 'text-[#006B48]' };
+      default:
+        return { type: 'Report', color: 'text-[#B17E0E]' };
+    }
+  };
+
   return (
     <section className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-4">
@@ -52,37 +62,43 @@ export const LatestInsights = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {insights.map((insight) => (
-            <Link 
-              key={insight.slug} 
-              href={insight.slug}
-              className="group"
-            >
-              <article>
-                <div className="relative h-[200px] md:h-[280px] mb-4 md:mb-6 overflow-hidden rounded-2xl">
-                  <Image
-                    src={insight.image}
-                    alt={insight.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-2 md:mb-3">
-                  <span className={`text-xs md:text-sm font-medium ${
-                    insight.type === 'Event' ? 'text-[#B01F29]' : 
-                    insight.type === 'Press Statement' ? 'text-[#006B48]' : 
-                    'text-[#B17E0E]'
-                  }`}>
-                    {insight.type}
-                  </span>
-                  <span className="text-xs md:text-sm text-gray-600">{insight.date}</span>
-                </div>
-                <h3 className="text-base md:text-xl font-medium text-gray-800 group-hover:text-gray-600 transition-colors">
-                  {insight.title}
-                </h3>
-              </article>
-            </Link>
-          ))}
+          {latestPosts.map((post) => {
+            const { type, color } = getPostType(post);
+            const date = new Date(post.date).toLocaleDateString('en-US', {
+              weekday: 'long',
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric'
+            });
+
+            return (
+              <Link 
+                key={post.id} 
+                href={`/insights/${post.slug}`}
+                className="group"
+              >
+                <article>
+                  <div className="relative h-[200px] md:h-[280px] mb-4 md:mb-6 overflow-hidden rounded-2xl">
+                    <CloudinaryImage
+                      src={post.featuredImage?.node?.sourceUrl || 'insights/fallback.png'}
+                      alt={post.featuredImage?.node?.altText || post.title.rendered}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-2 md:mb-3">
+                    <span className={`text-xs md:text-sm font-medium ${color}`}>
+                      {type}
+                    </span>
+                    <span className="text-xs md:text-sm text-gray-600">{date}</span>
+                  </div>
+                  <h3 className="text-base md:text-xl font-medium text-gray-800 group-hover:text-gray-600 transition-colors">
+                    {post.title.rendered}
+                  </h3>
+                </article>
+              </Link>
+            );
+          })}
         </div>
 
         <div className="flex justify-center mt-8 md:hidden">

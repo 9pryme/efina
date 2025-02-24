@@ -14,6 +14,7 @@ export function Home() {
     <main>
       <HeroSection />
       <Focus />
+      <div className="bg-white h-[200px]" />
       <LatestInsights />
       <Movement />
       <Framework />

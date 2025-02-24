@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { CloudinaryImage } from '@/src/components/ui/CloudinaryImage';
 import { motion } from 'framer-motion';
 
 interface AdvocacyHeroProps {
@@ -14,8 +14,8 @@ export const AboutHero = ({ title, description }: AdvocacyHeroProps) => {
       <section className="relative min-h-[400px] md:min-h-[600px] bg-black">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <Image
-            src="/images/advocacy/hero-bg.jpg"
+          <CloudinaryImage
+             src="banners/hero-bg"
             alt="Advocacy background"
             fill
             className="object-cover"
@@ -60,8 +60,8 @@ export const AboutHero = ({ title, description }: AdvocacyHeroProps) => {
           <div className="container mx-auto px-4">
             <div className="flex justify-end">
               <div className="relative w-full md:w-[1500px] h-[200px] md:h-[400px] rounded-lg shadow-xl overflow-hidden">
-                <Image
-                  src="/images/about/banner.jpg"
+                <CloudinaryImage
+                  src="about-hero"
                   alt="About banner"
                   fill
                   className="object-cover"

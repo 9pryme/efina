@@ -1,48 +1,49 @@
-import { InsightCard } from '../InsightCard';
+'use client';
 
-const relatedInsights = [
-  {
-    category: "Events",
-    title: "Terms of reference for documentary team on financial inclusion",
-    date: "November 11, 2024", 
-    duration: "3mins",
-    href: "/insights/event-1",
-  },
-  {
-    category: "News", 
-    title: "Terms of reference for documentary team on financial inclusion",
-    date: "November 11, 2024",
-    duration: "3mins",
-    href: "/insights/news-1",
-  },
-  {
-    category: "Podcast",
-    title: "Terms of reference for documentary team on financial inclusion", 
-    date: "November 11, 2024",
-    duration: "3mins",
-    href: "/insights/podcast-1",
-  }
-];
+import { useEffect, useState } from 'react';
+import { InsightCard } from '@/src/components/insights/InsightCard';
+import { Post } from '@/src/types/wordpress';
+import { getRecentPosts } from '@/src/lib/wordpress';
 
-export const ReadNext = () => {
+interface ReadNextProps {
+  currentPostId: string;
+}
+
+export const ReadNext = ({ currentPostId }: ReadNextProps) => {
+  const [relatedPosts, setRelatedPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const fetchRecentPosts = async () => {
+      const posts = await getRecentPosts(currentPostId);
+      setRelatedPosts(posts);
+    };
+
+    fetchRecentPosts();
+  }, [currentPostId]);
+
+  if (relatedPosts.length === 0) return null;
+
   return (
-    <section className="bg-gray-50 py-32">
+    <section className="py-12 md:py-24 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="font-display text-[40px] text-gray-900 mb-16">Read next</h2>
+        <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-8">
+          Read Next
+        </h2>
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {relatedInsights.slice(0, 1).map((insight, index) => (
+          {relatedPosts.slice(0, 1).map((post, index) => (
             <InsightCard 
-              key={insight.href}
-              {...insight}
+              key={post.id}
+              post={post}
               index={index}
             />
           ))}
-          {/* Show additional cards only on desktop */}
+          
           <div className="hidden md:contents">
-            {relatedInsights.slice(1).map((insight, index) => (
+            {relatedPosts.slice(1).map((post, index) => (
               <InsightCard
-                key={insight.href}
-                {...insight}
+                key={post.id}
+                post={post}
                 index={index + 1}
               />
             ))}

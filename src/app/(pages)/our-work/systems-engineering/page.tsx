@@ -9,7 +9,7 @@ export default function SystemsEngineeringPage() {
       <AdvocacyHero 
         title="Systems Strengthening"
         description="As a market facilitator, EFInA provides capacity building and technical advisory to eco-system stakeholders including policymakers, regulators, and financial service providers."
-        bannerImage="/images/banners/systems.png"
+        bannerImage="banners/systems"
       />
       <IntroSection />
       <CapacityBuildingSection />

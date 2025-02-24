@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { CloudinaryImage } from '@/src/components/ui/CloudinaryImage';
 
 interface InsightHeroProps {
   title: string;
@@ -14,8 +14,8 @@ export const InsightHero = ({ title, description }: InsightHeroProps) => {
       <section className="relative min-h-[400px] md:min-h-[600px] bg-black">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <Image
-            src="/images/insights/bg.png"
+          <CloudinaryImage
+            src="insights/bg"
             alt="Insights background"
             fill
             className="object-cover"

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     description: 'Promoting inclusive finance in Nigeria',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: 'https://res.cloudinary.com/delpitwkb/image/upload/og-image',
         width: 1200,
         height: 630,
         alt: 'EFInA'
@@ -43,19 +43,16 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'EFInA - Enhancing Financial Innovation & Access',
     description: 'Promoting inclusive finance in Nigeria',
-    images: ['/images/twitter-image.jpg'],
+    images: ['https://res.cloudinary.com/delpitwkb/image/upload/twitter-image'],
   },
   icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/apple-icon.png' },
-    ],
-    shortcut: ['/shortcut-icon.png'],
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+    other: {
+      rel: 'apple-touch-icon-precomposed',
+      url: '/apple-touch-icon-precomposed.png'
+    }
   },
   manifest: '/manifest.json',
   viewport: {
@@ -73,6 +70,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body className={`${raleway.variable} ${cormorantGaramond.variable} font-sans`}>
         <Header />
         {children}

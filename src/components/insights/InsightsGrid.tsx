@@ -1,203 +1,133 @@
 'use client';
 
-import { useState } from 'react';
+import { Post, Category } from '@/src/types/wordpress';
 import { InsightCard } from './InsightCard';
+import { useState } from 'react';
 import { ChevronDown, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const insights = [
-  {
-    category: "Publications",
-    title: "Request for Proposal for Access to Financial Services in Nigeria 2025 Survey",
-    date: "November 11, 2024", 
-    duration: "3mins",
-    href: "/insights/rfp-2025",
-  },
-  {
-    category: "News",
-    title: "Request for Proposal for Access to Financial Services in Nigeria 2025 Survey",
-    date: "November 11, 2024",
-    duration: "3mins", 
-    href: "/insights/news-1",
-  },
-  {
-    category: "Event",
-    title: "Terms of reference for documentary team on financial inclusion",
-    date: "November 11, 2024",
-    duration: "3mins",
-    href: "/insights/event-1",
-  },
-  {
-    category: "Publications",
-    title: "Financial Inclusion Report 2023: Progress and Challenges",
-    date: "November 10, 2024",
-    duration: "5mins",
-    href: "/insights/report-2023",
-  },
-  {
-    category: "News",
-    title: "EFInA Announces New Partnership for Digital Financial Services",
-    date: "November 9, 2024",
-    duration: "4mins",
-    href: "/insights/partnership-announcement",
-  },
-  {
-    category: "Event",
-    title: "Upcoming Webinar: The Future of Mobile Money in Nigeria",
-    date: "November 8, 2024",
-    duration: "2mins",
-    href: "/insights/webinar-mobile-money",
-  }
-];
+interface InsightsGridProps {
+  posts: Post[];
+  categories: Category[];
+}
 
-export const InsightsGrid = () => {
+export const InsightsGrid = ({ posts, categories }: InsightsGridProps) => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedYear, setSelectedYear] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [showMobileSearch, setShowMobileSearch] = useState(false);
   const itemsPerPage = 6;
-  const totalPages = Math.ceil(insights.length / itemsPerPage);
-  
-  // For display purposes, show max 5 page numbers
-  const getPageNumbers = () => {
-    return [1, 2, 3]; // Simulated pagination numbers
-  };
 
-  const paginatedInsights = insights.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  // Get unique years from posts
+  const years = [...new Set(posts.map(post => 
+    new Date(post.date).getFullYear()
+  ))].sort((a, b) => b - a); // Sort descending
+
+  // Filter posts based on category, year and search
+  const filteredPosts = posts.filter(post => {
+    const matchesCategory = selectedCategory === 'all' || 
+      post.categories.nodes.some(cat => cat.slug === selectedCategory);
+    
+    const matchesYear = selectedYear === 'all' ||
+      new Date(post.date).getFullYear().toString() === selectedYear;
+
+    const matchesSearch = searchQuery === '' || 
+      post.title.rendered.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.rendered.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesCategory && matchesSearch && matchesYear;
+  });
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredPosts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedPosts = filteredPosts.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <section className="py-8 md:py-32">
+    <section className="py-12 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        {/* Filters */}
-        <div className="flex flex-row md:flex-row md:items-center justify-between gap-4 mb-8 md:mb-12">
-          <div className="flex flex-row md:flex-row items-center gap-4 flex-1">
-            {/* Category Filter */}
-            <div className="relative flex-1 md:flex-none md:w-auto">
-              <select 
-                className="w-full md:w-auto appearance-none bg-white rounded-full px-6 py-3 pr-12 border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-300"
+        {/* Search and Filter Bar */}
+        <div className="flex flex-col md:flex-row gap-4 mb-8 justify-between p-4 rounded-[2rem] ">
+          <div className="flex gap-4">
+            {/* Category Filter Dropdown */}
+            <div className="relative">
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="px-4 py-3 pr-10 bg-white border border-gray-300 rounded-[2rem] text-gray-800 hover:bg-gray-50 appearance-none cursor-pointer"
               >
-                <option value="">Category</option>
-                <option value="news">News</option>
-                <option value="events">Events</option>
-                <option value="publications">Publications</option>
-                <option value="podcast">Podcast</option>
+                <option value="all">All Categories</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.slug}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
-              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 pointer-events-none" />
             </div>
 
-            {/* Year Filter */}
-            <div className="relative flex-1 md:flex-none md:w-auto">
-              <select 
-                className="w-full md:w-auto appearance-none bg-white rounded-full px-6 py-3 pr-12 border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-300"
+            {/* Year Filter Dropdown */}
+            <div className="relative">
+              <select
+                value={selectedYear}
+                onChange={(e) => setSelectedYear(e.target.value)}
+                className="px-4 py-3 pr-10 bg-white border border-gray-300 rounded-[2rem] text-gray-800 hover:bg-gray-50 appearance-none cursor-pointer"
               >
-                <option value="">Year</option>
-                <option value="2024">2024</option>
-                <option value="2023">2023</option>
-                <option value="2022">2022</option>
+                <option value="all">All Years</option>
+                {years.map((year) => (
+                  <option key={year} value={year.toString()}>
+                    {year}
+                  </option>
+                ))}
               </select>
-              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600 pointer-events-none" />
             </div>
           </div>
 
-          {/* Search */}
-          <div className="relative">
-            {/* Mobile Search Icon */}
-            <button 
-              className="md:hidden w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center"
-              onClick={() => setShowMobileSearch(!showMobileSearch)}
-            >
-              <Search className="text-gray-400" size={20} />
-            </button>
-
-            {/* Mobile Search Input */}
-            {showMobileSearch && (
-              <div className="absolute right-0 top-14 w-[280px] md:hidden">
-                <input
-                  type="text"
-                  placeholder="Search for anything"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-white rounded-full px-6 py-3 pl-12 border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-300"
-                />
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-              </div>
-            )}
-
-            {/* Desktop Search */}
-            <div className="hidden md:block">
-              <input
-                type="text"
-                placeholder="Search for anything"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-[300px] bg-white rounded-full px-6 py-3 pl-12 border border-gray-200 text-gray-900 focus:outline-none focus:border-gray-300"
-              />
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-            </div>
-          </div>
-        </div>
-
-        {/* Results Count */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
-          <p className="text-gray-600 text-sm md:text-base">Showing {((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, insights.length)} Of {insights.length} Results.</p>
-          <div className="relative">
-            <select 
-              className="appearance-none bg-transparent text-gray-900 pr-6 focus:outline-none text-sm md:text-base"
-            >
-              <option value="newest">Sort by: Newest</option>
-              <option value="oldest">Sort by: Oldest</option>
-            </select>
-            <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-gray-900" size={16} />
-          </div>
-        </div>
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-          {paginatedInsights.map((insight, index) => (
-            <InsightCard 
-              key={insight.href}
-              {...insight}
-              index={index}
+          {/* Search Input */}
+          <div className="relative w-full md:w-[400px]">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-600" />
+            <input
+              type="text"
+              placeholder="Search insights..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 rounded-[2rem] border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#008F60] focus:border-transparent"
             />
+          </div>
+        </div>
+
+        {/* Posts Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {paginatedPosts.map((post, index) => (
+            <InsightCard key={post.id} post={post} index={index} />
           ))}
         </div>
 
         {/* Pagination */}
-        <div className="flex justify-center items-center mt-8 md:mt-12">
-          <div className="inline-flex items-center gap-1 border border-gray-200 rounded-full px-2 py-1">
-            <button
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="p-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-            >
-              <ChevronLeft size={20} className="text-gray-900" />
-            </button>
-            
-            {getPageNumbers().map((page) => (
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center mt-12">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#F0F2F5] bg-white">
               <button
-                key={page}
-                onClick={() => setCurrentPage(Number(page))}
-                className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-colors ${
-                  currentPage === page 
-                    ? 'bg-gray-900 text-white' 
-                    : 'text-gray-900 hover:bg-gray-50'
-                }`}
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-800"
               >
-                {page}
+                <ChevronLeft className="w-5 h-5" />
               </button>
-            ))}
-            
-            <button
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className="p-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-            >
-              <ChevronRight size={20} className="text-gray-900" />
-            </button>
+              <span className="px-4 py-2 text-gray-800">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="p-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 text-gray-800"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
-}; 
+};

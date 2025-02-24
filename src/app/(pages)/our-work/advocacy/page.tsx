@@ -10,7 +10,7 @@ export default function AdvocacyPage() {
       <AdvocacyHero 
         title="Advocacy"
         description="EFInA uses advocacy and capacity building as a tool for facilitating the emergence of an all-inclusive and growth promoting financial system in Nigeria."
-        bannerImage="/images/banners/advocacy.png"
+        bannerImage="banners/advocacy"
       />
       <IntroSection />
       <BeliefsSection />
