@@ -4,13 +4,17 @@ import { InsightMeta } from '@/src/components/insights/detail/InsightMeta';
 import { ReadNext } from '@/src/components/insights/detail/ReadNext';
 import { getPost } from '@/src/lib/wordpress';
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next';
 
-interface Props {
-  params: { slug: string };
+type Props = {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const post = await getPost(params.slug);
   
   if (!post) {
