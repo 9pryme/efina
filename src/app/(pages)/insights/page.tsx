@@ -1,37 +1,22 @@
 import { InsightHero } from '@/src/components/insights/InsightHero';
 import { InsightsGrid } from '@/src/components/insights/InsightsGrid';
-import { getPosts, getCategories } from '@/src/lib/wordpress';
+import { mockPosts } from '@/src/data/mockPosts';
 
 export default async function InsightsPage() {
-  try {
-    const [posts, categories] = await Promise.all([
-      getPosts(),
-      getCategories()
-    ]);
-
-    return (
-      <main>
-        <InsightHero 
-          title="Insights"
-          description="Stay informed with our latest research, insights, and updates on financial inclusion in Nigeria."
-        />
-        <InsightsGrid posts={posts} categories={categories} />
-      </main>
-    );
-  } catch (error) {
-    console.error('Error loading insights:', error);
-    return (
-      <main>
-        <InsightHero 
-          title="Insights"
-          description="Stay informed with our latest research, insights, and updates on financial inclusion in Nigeria."
-        />
-        <div className="container mx-auto px-4 py-12">
-          <p className="text-center text-gray-600">
-            Failed to load insights. Please try again later.
-          </p>
-        </div>
-      </main>
-    );
-  }
+  return (
+    <>
+      <InsightHero 
+        title="Insights"
+        description="Stay informed with our latest research, insights, and updates on financial inclusion in Nigeria."
+      />
+      <InsightsGrid 
+        posts={mockPosts} 
+        categories={[
+          { id: '1', name: 'Report', slug: 'report', count: 1 },
+          { id: '2', name: 'Press Statement', slug: 'press-statement', count: 1 },
+          { id: '3', name: 'Event', slug: 'event', count: 1 }
+        ]} 
+      />
+    </>
+  );
 }

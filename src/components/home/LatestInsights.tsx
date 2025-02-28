@@ -5,24 +5,19 @@ import { useEffect, useState } from 'react';
 import { CloudinaryImage } from '@/src/components/ui/CloudinaryImage';
 import { Button } from '@/src/components/ui/Button';
 import { Post } from '@/src/types/wordpress';
-import { getPosts } from '@/src/lib/wordpress';
+import { mockPosts } from '@/src/data/mockPosts';
 
 export const LatestInsights = () => {
   const [latestPosts, setLatestPosts] = useState<Post[]>([]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const posts = await getPosts();
-        // Get the 3 most recent posts
-        setLatestPosts(posts.slice(0, 3));
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      }
-    };
-
-    fetchPosts();
+    setLatestPosts(mockPosts);
   }, []);
+
+  // Don't render the section if no posts are available
+  if (latestPosts.length === 0) {
+    return null;
+  }
 
   // Map WordPress categories to types
   const getPostType = (post: Post) => {
@@ -81,7 +76,7 @@ export const LatestInsights = () => {
                   <div className="relative h-[200px] md:h-[280px] mb-4 md:mb-6 overflow-hidden rounded-2xl">
                     <CloudinaryImage
                       src={post.featuredImage?.node?.sourceUrl || 'insights/fallback.png'}
-                      alt={post.featuredImage?.node?.altText || post.title.rendered}
+                      alt={post.featuredImage?.node?.altText || post.title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
@@ -93,7 +88,7 @@ export const LatestInsights = () => {
                     <span className="text-xs md:text-sm text-gray-600">{date}</span>
                   </div>
                   <h3 className="text-base md:text-xl font-medium text-gray-800 group-hover:text-gray-600 transition-colors">
-                    {post.title.rendered}
+                    {post.title}
                   </h3>
                 </article>
               </Link>
